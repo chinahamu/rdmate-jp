@@ -1,0 +1,95 @@
+{
+  "id": "humanities-social-science-jp-v1",
+  "name": "人文社会科学DMPテンプレート",
+  "version": "1.0.0",
+  "locale": "ja",
+  "language": "ja",
+  "templateType": "humanities_social_science",
+  "description": "調査票、インタビュー、アーカイブ資料、テキストデータを扱う研究向けテンプレートです。",
+  "targetFunder": "general",
+  "targetDiscipline": "humanities_social_science",
+  "targetFundingAgencyTypes": [
+    "kakenhi",
+    "jst",
+    "university",
+    "foundation",
+    "other"
+  ],
+  "sourceUrl": "https://github.com/chinahamu/rdmate-jp",
+  "compatibleTemplateVersions": [
+    "1.0.0"
+  ],
+  "maintainer": "RDMate JP project",
+  "lastReviewedAt": "2026-06-29",
+  "lastUpdated": "2026-06-29",
+  "sections": [
+    {
+      "id": "data_context",
+      "title": "資料・データの文脈",
+      "order": 1,
+      "questions": [
+        {
+          "id": "source_materials",
+          "label": "資料・データの出所",
+          "type": "textarea",
+          "required": true,
+          "order": 1
+        },
+        {
+          "id": "rights_status",
+          "label": "著作権・利用許諾の状況",
+          "type": "textarea",
+          "required": true,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "id": "sensitive_data",
+      "title": "調査・インタビュー情報",
+      "order": 2,
+      "questions": [
+        {
+          "id": "human_subject_applicability",
+          "label": "調査対象者情報の有無",
+          "type": "select",
+          "required": true,
+          "options": [
+            "あり",
+            "なし",
+            "確認中"
+          ],
+          "order": 1
+        },
+        {
+          "id": "consent_scope",
+          "label": "同意取得範囲・匿名化方針",
+          "type": "textarea",
+          "required": false,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "id": "publication",
+      "title": "公開・再利用",
+      "order": 3,
+      "questions": [
+        {
+          "id": "repository_plan",
+          "label": "公開予定先",
+          "type": "text",
+          "required": false,
+          "order": 1
+        },
+        {
+          "id": "reuse_conditions",
+          "label": "再利用条件・引用方法",
+          "type": "textarea",
+          "required": true,
+          "order": 2
+        }
+      ]
+    }
+  ]
+}

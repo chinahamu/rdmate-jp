@@ -1,0 +1,108 @@
+{
+  "id": "japanese-funder-jp-v1",
+  "name": "JST/AMED/科研費向け日本語DMPテンプレート",
+  "version": "1.0.0",
+  "locale": "ja",
+  "language": "ja",
+  "templateType": "japanese_funder",
+  "description": "JST、AMED、科研費等の日本語助成申請・研究開始時チェックに使いやすいテンプレートです。",
+  "targetFunder": "jst-amed-kakenhi",
+  "targetDiscipline": "general",
+  "targetFundingAgencyTypes": [
+    "jst",
+    "amed",
+    "kakenhi"
+  ],
+  "sourceUrl": "https://github.com/chinahamu/rdmate-jp",
+  "compatibleTemplateVersions": [
+    "1.0.0"
+  ],
+  "maintainer": "RDMate JP project",
+  "lastReviewedAt": "2026-06-29",
+  "lastUpdated": "2026-06-29",
+  "sections": [
+    {
+      "id": "funder_context",
+      "title": "助成機関・課題情報",
+      "order": 1,
+      "questions": [
+        {
+          "id": "funder_name",
+          "label": "助成機関・制度名",
+          "type": "select",
+          "required": true,
+          "options": [
+            "JST",
+            "AMED",
+            "科研費",
+            "その他"
+          ],
+          "order": 1
+        },
+        {
+          "id": "grant_number",
+          "label": "課題番号・採択番号",
+          "type": "text",
+          "required": false,
+          "order": 2
+        },
+        {
+          "id": "data_policy_requirements",
+          "label": "助成機関から求められるDMP・公開要件",
+          "type": "textarea",
+          "required": true,
+          "order": 3
+        }
+      ]
+    },
+    {
+      "id": "data_management",
+      "title": "研究データ管理",
+      "order": 2,
+      "questions": [
+        {
+          "id": "managed_data",
+          "label": "管理対象データ",
+          "type": "textarea",
+          "required": true,
+          "order": 1
+        },
+        {
+          "id": "metadata_plan",
+          "label": "メタデータ付与方針",
+          "type": "textarea",
+          "required": true,
+          "order": 2
+        },
+        {
+          "id": "repository_plan",
+          "label": "公開・寄託先候補",
+          "type": "text",
+          "required": false,
+          "order": 3
+        }
+      ]
+    },
+    {
+      "id": "governance",
+      "title": "公開制限・責任体制",
+      "order": 3,
+      "questions": [
+        {
+          "id": "restriction_reason",
+          "label": "公開制限がある場合の理由",
+          "type": "textarea",
+          "required": false,
+          "order": 1
+        },
+        {
+          "id": "responsible_party",
+          "label": "DMP管理責任者",
+          "type": "text",
+          "required": true,
+          "order": 2
+        }
+      ]
+    }
+  ]
+}

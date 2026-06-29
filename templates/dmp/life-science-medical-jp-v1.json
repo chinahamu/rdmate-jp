@@ -1,0 +1,99 @@
+{
+  "id": "life-science-medical-jp-v1",
+  "name": "生命科学・医学系DMPテンプレート",
+  "version": "1.0.0",
+  "locale": "ja",
+  "language": "ja",
+  "templateType": "life_science_medical",
+  "description": "試料、オミクス、画像、臨床関連データなどを扱う研究向けテンプレートです。",
+  "targetFunder": "general",
+  "targetDiscipline": "life_science_medical",
+  "targetFundingAgencyTypes": [
+    "amed",
+    "jst",
+    "kakenhi",
+    "university",
+    "foundation",
+    "other"
+  ],
+  "sourceUrl": "https://github.com/chinahamu/rdmate-jp",
+  "compatibleTemplateVersions": [
+    "1.0.0"
+  ],
+  "maintainer": "RDMate JP project",
+  "lastReviewedAt": "2026-06-29",
+  "lastUpdated": "2026-06-29",
+  "sections": [
+    {
+      "id": "data_materials",
+      "title": "データ・試料の概要",
+      "order": 1,
+      "questions": [
+        {
+          "id": "data_modalities",
+          "label": "データ種別・モダリティ",
+          "type": "multi_select",
+          "required": true,
+          "options": [
+            "オミクス",
+            "画像",
+            "臨床情報",
+            "実験ノート",
+            "解析コード",
+            "その他"
+          ],
+          "order": 1
+        },
+        {
+          "id": "sample_linkage",
+          "label": "試料・検体との紐付け管理",
+          "type": "textarea",
+          "required": false,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "id": "standards",
+      "title": "標準・品質管理",
+      "order": 2,
+      "questions": [
+        {
+          "id": "metadata_standards",
+          "label": "利用するメタデータ標準",
+          "type": "textarea",
+          "required": true,
+          "order": 1
+        },
+        {
+          "id": "quality_control",
+          "label": "品質管理・前処理手順",
+          "type": "textarea",
+          "required": true,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "id": "sharing",
+      "title": "保存・公開",
+      "order": 3,
+      "questions": [
+        {
+          "id": "repository_plan",
+          "label": "公開・寄託先候補",
+          "type": "text",
+          "required": false,
+          "order": 1
+        },
+        {
+          "id": "access_limitations",
+          "label": "アクセス制限・倫理的配慮",
+          "type": "textarea",
+          "required": true,
+          "order": 2
+        }
+      ]
+    }
+  ]
+}

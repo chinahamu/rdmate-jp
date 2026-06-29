@@ -1,0 +1,50 @@
+.data-protection-summary,
+.data-protection-card-grid,
+.data-protection-card,
+.data-protection-table-section {
+  display: grid;
+  gap: 20px;
+}
+
+.data-protection-summary,
+.data-protection-table-section {
+  grid-template-columns: minmax(0, 1.3fr) minmax(320px, 1fr);
+  margin-bottom: 20px;
+}
+
+.data-protection-card-grid {
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  margin-bottom: 20px;
+}
+
+.data-protection-card p,
+.data-protection-summary p,
+.data-protection-table-section p {
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.data-protection-card .dataset-issue-list,
+.data-protection-table-section .dataset-issue-list {
+  margin: 0;
+}
+
+.data-protection-card .dataset-issue-list span,
+.data-protection-table-section .dataset-issue-list span {
+  display: block;
+  margin-top: 6px;
+}
+
+.data-protection-table-section td code {
+  display: block;
+  overflow-wrap: anywhere;
+  color: var(--muted);
+}
+
+@media (max-width: 960px) {
+  .data-protection-summary,
+  .data-protection-table-section {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+}

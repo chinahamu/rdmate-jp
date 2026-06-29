@@ -1,0 +1,114 @@
+{
+  "id": "computational-ai-jp-v1",
+  "name": "計算科学・AI研究DMPテンプレート",
+  "version": "1.0.0",
+  "locale": "ja",
+  "language": "ja",
+  "templateType": "computational_ai",
+  "description": "データセット、モデル、コード、計算環境、再現性を重点確認するテンプレートです。",
+  "targetFunder": "general",
+  "targetDiscipline": "computational_ai",
+  "targetFundingAgencyTypes": [
+    "kakenhi",
+    "jst",
+    "university",
+    "foundation",
+    "other"
+  ],
+  "sourceUrl": "https://github.com/chinahamu/rdmate-jp",
+  "compatibleTemplateVersions": [
+    "1.0.0"
+  ],
+  "maintainer": "RDMate JP project",
+  "lastReviewedAt": "2026-06-29",
+  "lastUpdated": "2026-06-29",
+  "sections": [
+    {
+      "id": "data_and_model",
+      "title": "データ・モデル概要",
+      "order": 1,
+      "questions": [
+        {
+          "id": "dataset_description",
+          "label": "利用・生成するデータセット",
+          "type": "textarea",
+          "required": true,
+          "order": 1
+        },
+        {
+          "id": "model_artifacts",
+          "label": "モデル・重み・評価結果の管理対象",
+          "type": "textarea",
+          "required": false,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "id": "reproducibility",
+      "title": "再現性",
+      "order": 2,
+      "questions": [
+        {
+          "id": "code_repository",
+          "label": "コードリポジトリURL",
+          "type": "url",
+          "required": false,
+          "order": 1
+        },
+        {
+          "id": "environment_spec",
+          "label": "実行環境の固定方法",
+          "type": "multi_select",
+          "required": true,
+          "options": [
+            "requirements.txt",
+            "environment.yml",
+            "Dockerfile",
+            "devcontainer",
+            "lockfile",
+            "その他"
+          ],
+          "order": 2
+        },
+        {
+          "id": "random_seed_policy",
+          "label": "乱数シード・実験設定の記録方針",
+          "type": "textarea",
+          "required": false,
+          "order": 3
+        }
+      ]
+    },
+    {
+      "id": "publication",
+      "title": "公開・ライセンス",
+      "order": 3,
+      "questions": [
+        {
+          "id": "license",
+          "label": "コード・データのライセンス候補",
+          "type": "select",
+          "required": true,
+          "options": [
+            "MIT",
+            "Apache-2.0",
+            "BSD-3-Clause",
+            "CC BY 4.0",
+            "CC0",
+            "独自条件",
+            "未定"
+          ],
+          "order": 1
+        },
+        {
+          "id": "data_availability",
+          "label": "データ取得手順・公開予定",
+          "type": "textarea",
+          "required": true,
+          "order": 2
+        }
+      ]
+    }
+  ]
+}

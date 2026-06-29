@@ -1,0 +1,78 @@
+name: Feature Request
+description: RDMate JPへの機能追加・改善を提案します
+title: "feat: "
+labels: ["enhancement", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        機能提案ありがとうございます。利用者像、解決したい課題、期待する操作フローを中心に記載してください。
+  - type: textarea
+    id: problem
+    attributes:
+      label: 解決したい課題
+      description: 現在どのような不便、運用上の課題、研究データ管理上の問題がありますか。
+      placeholder: 例：研究室内でDataset台帳の公開判断をレビューする導線が不足している。
+    validations:
+      required: true
+  - type: textarea
+    id: proposed-solution
+    attributes:
+      label: 提案する解決策
+      description: 期待する機能、画面、API、CLI、ドキュメント変更を記載してください。
+    validations:
+      required: true
+  - type: dropdown
+    id: affected-area
+    attributes:
+      label: 主な対象領域
+      options:
+        - DMP作成
+        - DMPテンプレート
+        - RDM Lite / Dataset台帳
+        - メタデータ
+        - 保存場所・ファイルマニフェスト
+        - 公開区分・ライセンス
+        - インポート/エクスポート
+        - 権限・監査ログ
+        - Docker / 運用
+        - API / CLI
+        - ドキュメント
+        - その他
+    validations:
+      required: true
+  - type: textarea
+    id: user-flow
+    attributes:
+      label: 期待する操作フロー
+      description: 利用者がどのように操作する想定かを記載してください。
+      placeholder: |
+        1. /publication-license を開く
+        2. Datasetを選ぶ
+        3. レビュー担当者を設定する
+        4. 承認履歴が監査ログに残る
+    validations:
+      required: false
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: 代替案
+      description: 現在の回避策や、別の実装案があれば記載してください。
+    validations:
+      required: false
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: 補足情報
+      description: 関連する制度、運用ルール、参考資料、関連Issue/PRがあれば記載してください。
+    validations:
+      required: false
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: 確認事項
+      options:
+        - label: 既存Issueに同じ提案がないか確認しました
+          required: true
+        - label: 個人情報、秘密値、実データ本体を貼り付けていません
+          required: true

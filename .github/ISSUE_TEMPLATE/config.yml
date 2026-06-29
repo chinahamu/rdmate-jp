@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: RDMate JP Discussions
+    url: https://github.com/chinahamu/rdmate-jp/discussions
+    about: 使い方の質問、運用相談、DMPテンプレート案の事前相談はこちらを利用してください。
+  - name: Documentation
+    url: https://github.com/chinahamu/rdmate-jp/tree/main/docs
+    about: セットアップ、運用、API、テンプレート作成方法のドキュメントを確認できます。

@@ -1,0 +1,45 @@
+title: "Q&A: "
+labels: ["question"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        RDMate JPの使い方、セットアップ、運用に関する質問用テンプレートです。
+  - type: textarea
+    id: question
+    attributes:
+      label: 質問内容
+      description: 何を知りたいか、どこで困っているかを記載してください。
+      placeholder: 例：Docker ComposeでPostgreSQL profileを使う場合のDATABASE_URL設定を確認したい。
+    validations:
+      required: true
+  - type: dropdown
+    id: topic
+    attributes:
+      label: 関連トピック
+      options:
+        - セットアップ
+        - Docker / デプロイ
+        - DMP作成
+        - DMPテンプレート
+        - RDM Lite
+        - エクスポート
+        - 権限・監査ログ
+        - API / CLI
+        - その他
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: 実行環境・前提
+      description: 必要に応じてOS、Node.js、pnpm、Docker利用有無などを記載してください。
+    validations:
+      required: false
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: 確認事項
+      options:
+        - label: 個人情報、秘密値、実データ本体を貼り付けていません
+          required: true

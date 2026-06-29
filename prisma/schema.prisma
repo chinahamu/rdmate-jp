@@ -1,0 +1,318 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model ResearchProject {
+  id                          String           @id @default(cuid())
+  title                       String
+  summary                     String
+  field                       String
+  startDate                   DateTime
+  expectedEndDate             DateTime
+  status                      String           @default("draft")
+  projectNumber               String?
+  institutionLocalProjectCode String?
+  preferredDmpLanguage        String           @default("ja")
+  dataManagerName             String?
+  dataManagerMemberId         String?
+  createdAt                   DateTime         @default(now())
+  updatedAt                   DateTime         @updatedAt
+  members                     ResearchMember[]
+  funding                     Funding[]
+  datasets                    Dataset[]
+}
+
+model ResearchMember {
+  id                         String          @id @default(cuid())
+  projectId                  String
+  name                       String
+  nameJa                     String?
+  nameEn                     String?
+  affiliation                String
+  affiliationInstitution     String?
+  affiliationGraduateSchool  String?
+  affiliationFaculty         String?
+  affiliationDepartment      String?
+  affiliationMajor           String?
+  affiliationLaboratory      String?
+  role                       String
+  email                      String
+  orcid                      String?
+  createdAt                  DateTime        @default(now())
+  updatedAt                  DateTime        @updatedAt
+  project                    ResearchProject @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@index([projectId])
+  @@index([affiliationInstitution])
+  @@index([affiliationFaculty])
+  @@index([affiliationDepartment])
+}
+
+model Funding {
+  id            String          @id @default(cuid())
+  projectId     String
+  agencyName    String
+  agencyType    String          @default("other")
+  programName   String
+  projectNumber String?
+  grantNumber   String?
+  fiscalYear    String?
+  periodStart   DateTime?
+  periodEnd     DateTime?
+  url           String?
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  project       ResearchProject @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@index([projectId])
+  @@index([agencyType])
+  @@index([projectNumber])
+}
+
+model Dataset {
+  id                     String                      @id @default(cuid())
+  projectId              String
+  name                   String
+  description            String
+  dataType               String
+  generatedDate          DateTime
+  lastUpdatedDate        DateTime?
+  version                String                      @default("1.0.0")
+  status                 String                      @default("unchecked")
+  createdBy              String
+  responsibleMemberId    String
+  publicationStatus      String                      @default("undecided")
+  plannedPublicationDate DateTime?
+  publicUrl              String?
+  doi                    String?
+  license                String?
+  usageTerms             String?
+  citation               String?
+  createdAt              DateTime                    @default(now())
+  updatedAt              DateTime                    @updatedAt
+  project                ResearchProject             @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  storageLocations       DatasetStorageLocation[]
+  fileManifestEntries    DatasetFileManifestEntry[]
+  metadata               DatasetMetadata?
+  publicationDecision    DatasetPublicationDecision?
+  relatedOutputs         DatasetRelatedOutput[]
+
+  @@index([projectId])
+  @@index([dataType])
+  @@index([status])
+  @@index([publicationStatus])
+  @@index([responsibleMemberId])
+}
+
+model DatasetStorageLocation {
+  id                  String                     @id @default(cuid())
+  datasetId           String
+  label               String?
+  uri                 String
+  storageType         String
+  accessScope         String?
+  hasBackup           Boolean                    @default(false)
+  isEncrypted         Boolean                    @default(false)
+  notes               String?
+  createdAt           DateTime                   @default(now())
+  updatedAt           DateTime                   @updatedAt
+  dataset             Dataset                    @relation(fields: [datasetId], references: [id], onDelete: Cascade)
+  fileManifestEntries DatasetFileManifestEntry[]
+
+  @@index([datasetId])
+  @@index([storageType])
+}
+
+model DatasetFileManifestEntry {
+  id                String                  @id @default(cuid())
+  datasetId         String
+  storageLocationId String?
+  fileName          String
+  relativePath      String
+  sizeBytes         BigInt
+  hashAlgorithm     String                  @default("none")
+  hashValue         String?
+  mimeType          String
+  modifiedAt        DateTime
+  createdAt         DateTime                @default(now())
+  updatedAt         DateTime                @updatedAt
+  dataset           Dataset                 @relation(fields: [datasetId], references: [id], onDelete: Cascade)
+  storageLocation   DatasetStorageLocation? @relation(fields: [storageLocationId], references: [id], onDelete: SetNull)
+
+  @@index([datasetId])
+  @@index([storageLocationId])
+  @@index([relativePath])
+}
+
+model DatasetMetadata {
+  id                String                     @id @default(cuid())
+  datasetId         String                     @unique
+  title             String
+  description       String
+  researchField     String
+  acquisitionMethod String
+  language          String                     @default("ja")
+  publisher         String?
+  rightsHolder      String?
+  temporalStartDate DateTime?
+  temporalEndDate   DateTime?
+  spatialPlaceName  String?
+  spatialWest       Float?
+  spatialSouth      Float?
+  spatialEast       Float?
+  spatialNorth      Float?
+  createdAt         DateTime                   @default(now())
+  updatedAt         DateTime                   @updatedAt
+  dataset           Dataset                    @relation(fields: [datasetId], references: [id], onDelete: Cascade)
+  creators          DatasetMetadataCreator[]
+  keywords          DatasetMetadataKeyword[]
+  variables         DatasetMetadataVariable[]
+  relatedPapers     DatasetRelatedPaper[]
+  relatedSoftware   DatasetRelatedSoftware[]
+
+  @@index([datasetId])
+  @@index([researchField])
+}
+
+model DatasetMetadataCreator {
+  id          String          @id @default(cuid())
+  metadataId  String
+  name        String
+  affiliation String
+  orcid       String?
+  role        String?
+  metadata    DatasetMetadata @relation(fields: [metadataId], references: [id], onDelete: Cascade)
+
+  @@index([metadataId])
+}
+
+model DatasetMetadataKeyword {
+  id         String          @id @default(cuid())
+  metadataId String
+  keyword    String
+  metadata   DatasetMetadata @relation(fields: [metadataId], references: [id], onDelete: Cascade)
+
+  @@index([metadataId])
+  @@index([keyword])
+}
+
+model DatasetMetadataVariable {
+  id           String          @id @default(cuid())
+  metadataId   String
+  name         String
+  label        String?
+  description  String
+  dataType     String          @default("unknown")
+  unit         String?
+  missingValue String?
+  vocabulary   String?
+  metadata     DatasetMetadata @relation(fields: [metadataId], references: [id], onDelete: Cascade)
+
+  @@index([metadataId])
+  @@index([name])
+}
+
+model DatasetRelatedPaper {
+  id              String          @id @default(cuid())
+  metadataId      String
+  title           String
+  paperType       String          @default("journal_article")
+  doi             String?
+  url             String?
+  journalName     String?
+  publicationYear String?
+  relation        String          @default("isSupplementTo")
+  metadata        DatasetMetadata @relation(fields: [metadataId], references: [id], onDelete: Cascade)
+
+  @@index([metadataId])
+  @@index([doi])
+}
+
+model DatasetRelatedSoftware {
+  id                 String          @id @default(cuid())
+  metadataId         String
+  name               String
+  softwareType       String          @default("source_code")
+  url                String?
+  version            String?
+  license            String?
+  runtimeEnvironment String?
+  relation           String          @default("isSourceOf")
+  metadata           DatasetMetadata @relation(fields: [metadataId], references: [id], onDelete: Cascade)
+
+  @@index([metadataId])
+  @@index([url])
+}
+
+model DatasetRelatedOutput {
+  id                  String                 @id @default(cuid())
+  datasetId           String
+  kind                String
+  relation            String
+  title               String
+  doi                 String?
+  arxivId             String?
+  arxivUrl            String?
+  url                 String?
+  journalName         String?
+  publicationYear     String?
+  repositoryUrl       String?
+  releaseTag          String?
+  license             String?
+  runtimeEnvironment  String?
+  protocolId          String?
+  protocolUrl         String?
+  version             String?
+  responsibleMemberId String?
+  notes               String?
+  createdAt           DateTime               @default(now())
+  updatedAt           DateTime               @updatedAt
+  dataset             Dataset                @relation(fields: [datasetId], references: [id], onDelete: Cascade)
+  changeHistory       ProtocolChangeRecord[]
+
+  @@index([datasetId])
+  @@index([kind])
+  @@index([relation])
+  @@index([doi])
+  @@index([repositoryUrl])
+  @@index([protocolId])
+}
+
+model ProtocolChangeRecord {
+  id              String               @id @default(cuid())
+  relatedOutputId String
+  changedAt       DateTime
+  version         String
+  changedBy       String
+  summary         String
+  relatedOutput   DatasetRelatedOutput @relation(fields: [relatedOutputId], references: [id], onDelete: Cascade)
+
+  @@index([relatedOutputId])
+  @@index([version])
+}
+
+model DatasetPublicationDecision {
+  id                         String   @id @default(cuid())
+  datasetId                  String   @unique
+  containsPersonalInformation Boolean  @default(false)
+  hasCollaborativeAgreement   Boolean  @default(false)
+  hasPatentPlan               Boolean  @default(false)
+  nonPublicationReason        String?
+  personalInformationHandling String?
+  collaborativeAgreementNote  String?
+  patentPublicationNote       String?
+  reviewedBy                  String?
+  reviewedAt                  DateTime?
+  createdAt                   DateTime @default(now())
+  updatedAt                   DateTime @updatedAt
+  dataset                     Dataset  @relation(fields: [datasetId], references: [id], onDelete: Cascade)
+
+  @@index([datasetId])
+  @@index([hasCollaborativeAgreement])
+  @@index([hasPatentPlan])
+}

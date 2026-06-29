@@ -1,0 +1,214 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "jp-funder-basic-v1",
+  "name": {
+    "ja": "日本の助成機関向けDMP基本チェック",
+    "en": "Basic DMP checks for Japanese funders"
+  },
+  "description": {
+    "ja": "JST、AMED、科研費、学内助成を想定した必須・推奨・条件付き・禁止ルールです。",
+    "en": "Required, recommended, conditional, and forbidden rules for JST, AMED, KAKENHI, and university grants."
+  },
+  "targetFundingAgencyTypes": ["jst", "amed", "kakenhi", "university"],
+  "sourceUrl": "https://github.com/chinahamu/rdmate-jp",
+  "maintainer": "RDMate JP project",
+  "lastReviewedAt": "2026-06-29",
+  "rules": [
+    {
+      "id": "required.data-and-metadata-plan",
+      "type": "required",
+      "weight": 15,
+      "fieldGroups": [
+        ["data_description.data_types", "data_management.managed_data", "data_and_model.dataset_description"],
+        ["data_description.metadata_standards", "data_management.metadata_plan", "standards.metadata_standards", "data_type.metadata_standards"]
+      ],
+      "message": {
+        "ja": "管理対象データとメタデータ付与方針を記載してください。",
+        "en": "Describe the managed data and metadata plan."
+      },
+      "remediation": {
+        "ja": "データ種別、ファイル形式、メタデータ標準、研究室内命名規則を追記してください。",
+        "en": "Add data types, file formats, metadata standards, and local naming rules."
+      },
+      "uraCommentPrompt": {
+        "ja": "助成機関のDMP要件に照らして、管理対象データの範囲が十分か確認してください。",
+        "en": "Check whether the scope of managed data satisfies the funder's DMP expectations."
+      },
+      "libraryCommentPrompt": {
+        "ja": "メタデータ標準、リポジトリ登録時の記述項目、キーワードの粒度を確認してください。",
+        "en": "Review metadata standards, repository deposit fields, and keyword granularity."
+      }
+    },
+    {
+      "id": "recommended.repository-plan",
+      "type": "recommended",
+      "weight": 8,
+      "fieldGroups": [["data_management.repository_plan", "publication.repository_plan", "sharing.repository_plan", "sharing_access.repository"]],
+      "message": {
+        "ja": "公開・寄託先候補を記載することを推奨します。",
+        "en": "A candidate repository or deposit destination is recommended."
+      },
+      "remediation": {
+        "ja": "機関リポジトリ、JAIRO Cloud、分野別リポジトリ、Zenodo等の候補を記載してください。",
+        "en": "Add candidate destinations such as an institutional repository, JAIRO Cloud, a disciplinary repository, or Zenodo."
+      },
+      "libraryCommentPrompt": {
+        "ja": "図書館・リポジトリ担当者が、公開先候補とメタデータ登録方針を確認してください。",
+        "en": "Library/repository staff should review repository candidates and metadata deposit plans."
+      }
+    },
+    {
+      "id": "required.responsible-party",
+      "type": "required",
+      "weight": 12,
+      "fieldGroups": [["responsibility.data_manager", "governance.responsible_party", "oversight.responsible_party", "project_context.data_owner"]],
+      "message": {
+        "ja": "DMP管理責任者を明記してください。",
+        "en": "Specify the person responsible for DMP management."
+      },
+      "remediation": {
+        "ja": "PI、Data Steward、URAとの連絡窓口など、DMP更新判断を行う責任者を入力してください。",
+        "en": "Enter the PI, data steward, or contact person responsible for DMP updates."
+      }
+    },
+    {
+      "id": "conditional.personal-data-controls",
+      "type": "conditional",
+      "severity": "error",
+      "weight": 18,
+      "conditionMode": "any",
+      "conditions": [
+        { "operator": "matches_any", "values": ["個人情報", "個人データ", "要配慮", "患者", "調査対象者", "人を対象", "personal data", "human subjects"] }
+      ],
+      "fieldGroups": [
+        ["ethics.consent_scope", "sensitive_data.consent_scope"],
+        ["privacy.anonymization_method", "sensitive_data.consent_scope"],
+        ["privacy.access_control", "sharing.access_limitations"]
+      ],
+      "message": {
+        "ja": "個人情報・人を対象とする研究では、同意・匿名化・アクセス制御の説明が必要です。",
+        "en": "Human-subject or personal data research requires consent, anonymization, and access-control descriptions."
+      },
+      "remediation": {
+        "ja": "同意取得範囲、匿名化・仮名化方法、アクセス権限、倫理審査の状況を追記してください。",
+        "en": "Add consent scope, anonymization/pseudonymization methods, access permissions, and ethics-review status."
+      },
+      "uraCommentPrompt": {
+        "ja": "URAは倫理審査、同意文書、共同研究契約とDMP記載内容の整合を確認してください。",
+        "en": "URA should check consistency among ethics approval, consent documents, collaboration agreements, and DMP text."
+      }
+    },
+    {
+      "id": "conditional.international-collaboration",
+      "type": "conditional",
+      "severity": "warning",
+      "weight": 10,
+      "conditionMode": "any",
+      "conditions": [
+        { "operator": "project_has_external_collaborator" },
+        { "operator": "matches_any", "values": ["国際共同研究", "国外", "海外", "国外移転", "international", "overseas"] }
+      ],
+      "fieldGroups": [
+        ["privacy.access_control", "sharing.access_limitations", "sharing_access.access_limitations"],
+        ["data_management.repository_plan", "publication.repository_plan", "sharing.repository_plan", "sharing_access.repository"]
+      ],
+      "message": {
+        "ja": "国際共同研究・外部共同研究では、国外移転・契約・アクセス制御の確認が必要です。",
+        "en": "International or external collaboration requires checks on cross-border transfer, agreements, and access control."
+      },
+      "remediation": {
+        "ja": "国外移転の有無、共同研究契約、アクセス範囲、共有ログ管理、公開先を確認してください。",
+        "en": "Review cross-border transfer, collaboration agreements, access scope, sharing logs, and repository destination."
+      },
+      "uraCommentPrompt": {
+        "ja": "URAは共同研究契約・国外移転・知財条件を確認し、必要に応じて法務・研究推進部門へ接続してください。",
+        "en": "URA should review collaboration agreements, cross-border transfer, and IP conditions and route to legal/research administration if needed."
+      }
+    },
+    {
+      "id": "conditional.private-data-alternative-output",
+      "type": "conditional",
+      "severity": "error",
+      "weight": 15,
+      "conditionMode": "any",
+      "conditions": [
+        { "fieldId": "storage_and_sharing.sharing_policy", "operator": "equals", "value": "非公開" },
+        { "fieldId": "storage_and_sharing.sharing_policy", "operator": "equals", "value": "制限付き公開" },
+        { "fieldId": "sharing.sharing_policy", "operator": "equals", "value": "非公開" },
+        { "fieldId": "sharing.sharing_policy", "operator": "equals", "value": "制限付き公開" }
+      ],
+      "fieldGroups": [
+        ["storage_and_sharing.private_reason", "sharing.private_reason", "governance.restriction_reason"],
+        ["data_management.repository_plan", "publication.repository_plan", "sharing.repository_plan", "data_description.metadata_standards"]
+      ],
+      "message": {
+        "ja": "非公開・制限付き公開データには、非公開理由と代替公開物の記載が必要です。",
+        "en": "Restricted or closed data requires a reason and an alternative public output plan."
+      },
+      "remediation": {
+        "ja": "非公開理由、公開可能なメタデータ、代替データ、コード、手順書、問い合わせ先を記載してください。",
+        "en": "Add the restriction reason, public metadata, alternative data, code, protocols, or contact point."
+      },
+      "libraryCommentPrompt": {
+        "ja": "図書館担当者は、非公開データの代替公開物とメタデータ公開の可否を確認してください。",
+        "en": "Library staff should review alternative public outputs and metadata-publication feasibility."
+      }
+    },
+    {
+      "id": "conditional.software-output-reproducibility",
+      "type": "conditional",
+      "severity": "warning",
+      "weight": 10,
+      "conditionMode": "any",
+      "conditions": [
+        { "operator": "matches_any", "values": ["ソフトウェア", "コード", "解析コード", "GitHub", "GitLab", "Docker", "model", "software"] }
+      ],
+      "fieldGroups": [
+        ["publication.license", "related_tools.code_availability"],
+        ["reproducibility.code_repository", "data_management.repository_plan", "publication.repository_plan", "sharing.repository_plan"]
+      ],
+      "message": {
+        "ja": "ソフトウェア成果物を含む場合は、ライセンスとリポジトリURLが必要です。",
+        "en": "Software outputs require a license and repository URL."
+      },
+      "remediation": {
+        "ja": "コードリポジトリ、ライセンス、実行環境、リリースタグまたはコミットハッシュを記載してください。",
+        "en": "Add code repository, license, runtime environment, and release tag or commit hash."
+      }
+    },
+    {
+      "id": "forbidden.undecided-sharing-policy",
+      "type": "forbidden",
+      "severity": "warning",
+      "weight": 7,
+      "targetTemplateIds": ["generic-jp-v2", "human-subjects-jp-v1"],
+      "fieldIds": ["storage_and_sharing.sharing_policy", "sharing.sharing_policy"],
+      "forbiddenValues": ["未定"],
+      "message": {
+        "ja": "公開・共有方針を未定のままにしないでください。",
+        "en": "Do not leave the sharing policy undecided."
+      },
+      "remediation": {
+        "ja": "公開、制限付き公開、非公開のいずれかを選び、未定の場合は判断時期と担当者を記載してください。",
+        "en": "Choose public, restricted, or closed, or add a decision date and responsible person."
+      }
+    },
+    {
+      "id": "forbidden.japanese-funder-unspecified",
+      "type": "forbidden",
+      "severity": "warning",
+      "weight": 5,
+      "targetTemplateIds": ["japanese-funder-jp-v1"],
+      "fieldIds": ["funder_context.funder_name"],
+      "forbiddenValues": ["その他"],
+      "message": {
+        "ja": "助成機関名をその他のままにしないでください。",
+        "en": "Do not leave the funder name as Other."
+      },
+      "remediation": {
+        "ja": "JST、AMED、科研費など該当制度を選択し、該当しない場合は制度名を自由記述欄へ補足してください。",
+        "en": "Select JST, AMED, KAKENHI, or add the exact funder/program name in a free-text field."
+      }
+    }
+  ]
+}

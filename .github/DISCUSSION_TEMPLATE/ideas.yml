@@ -1,0 +1,44 @@
+title: "Idea: "
+labels: ["idea"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        RDMate JPの改善案、運用アイデア、将来構想を相談するためのテンプレートです。具体的な実装依頼に固まったらIssue化してください。
+  - type: textarea
+    id: idea
+    attributes:
+      label: アイデア概要
+      description: どのような改善・機能・運用を考えているか記載してください。
+    validations:
+      required: true
+  - type: textarea
+    id: user-value
+    attributes:
+      label: 想定する利用者価値
+      description: 研究者、Data Steward、管理者、開発者にとってどのような価値がありますか。
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: 関連領域
+      options:
+        - DMP作成
+        - DMPテンプレート
+        - RDM Lite
+        - メタデータ
+        - 公開区分・ライセンス
+        - 権限・監査ログ
+        - デプロイ・運用
+        - OSSコミュニティ
+        - その他
+    validations:
+      required: true
+  - type: textarea
+    id: next-step
+    attributes:
+      label: 次の一歩
+      description: PoC、ドキュメント化、Issue化、調査など、次に必要なことがあれば記載してください。
+    validations:
+      required: false

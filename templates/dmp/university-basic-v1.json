@@ -1,0 +1,112 @@
+{
+  "id": "university-basic-v1",
+  "name": "大学研究室向け簡易DMPテンプレート",
+  "version": "1.0.0",
+  "locale": "ja",
+  "language": "ja",
+  "templateType": "university_lab",
+  "description": "大学・研究室での研究開始時に、URA・図書館・研究支援担当者と確認しやすい簡易テンプレートです。",
+  "targetFunder": "university",
+  "targetDiscipline": "general",
+  "targetFundingAgencyTypes": [
+    "university",
+    "kakenhi",
+    "foundation",
+    "other"
+  ],
+  "sourceUrl": "https://github.com/chinahamu/rdmate-jp",
+  "compatibleTemplateVersions": [
+    "1.0.0"
+  ],
+  "maintainer": "RDMate JP project",
+  "lastReviewedAt": "2026-06-29",
+  "lastUpdated": "2026-06-29",
+  "sections": [
+    {
+      "id": "project_context",
+      "title": "研究課題の基本情報",
+      "order": 1,
+      "questions": [
+        {
+          "id": "research_field",
+          "label": "研究分野",
+          "type": "text",
+          "required": true,
+          "order": 1
+        },
+        {
+          "id": "data_owner",
+          "label": "データ管理責任者",
+          "type": "text",
+          "required": true,
+          "helpText": "研究室内でデータ管理判断を行う責任者を記載します。",
+          "order": 2
+        }
+      ]
+    },
+    {
+      "id": "data_lifecycle",
+      "title": "データライフサイクル",
+      "order": 2,
+      "questions": [
+        {
+          "id": "collection_method",
+          "label": "データ取得・生成方法",
+          "type": "textarea",
+          "required": true,
+          "order": 1
+        },
+        {
+          "id": "storage_location",
+          "label": "研究期間中の保存場所",
+          "type": "select",
+          "required": true,
+          "options": [
+            "研究室サーバ",
+            "大学提供クラウド",
+            "機関リポジトリ",
+            "外部サービス",
+            "その他"
+          ],
+          "order": 2
+        },
+        {
+          "id": "backup_policy",
+          "label": "バックアップ方針",
+          "type": "textarea",
+          "required": true,
+          "order": 3
+        }
+      ]
+    },
+    {
+      "id": "publication",
+      "title": "公開・再利用",
+      "order": 3,
+      "questions": [
+        {
+          "id": "repository_plan",
+          "label": "公開予定リポジトリ",
+          "type": "text",
+          "required": false,
+          "helpText": "未定の場合は候補や検討状況を記載します。",
+          "order": 1
+        },
+        {
+          "id": "license",
+          "label": "ライセンス候補",
+          "type": "select",
+          "required": true,
+          "options": [
+            "CC BY 4.0",
+            "CC BY-NC 4.0",
+            "CC0",
+            "独自条件",
+            "未定"
+          ],
+          "order": 2
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rdmate-jp.local/schemas/dmp-export.schema.json",
+  "title": "RDMate JP DMP Export",
+  "type": "object",
+  "required": ["schemaVersion", "generatedAt", "template", "project", "answers"],
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0.0"
+    },
+    "generatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "template": {
+      "type": "object",
+      "required": ["id", "version", "name"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "version": { "type": "string", "minLength": 1 },
+        "name": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "project": {
+      "type": "object",
+      "required": ["id", "title", "summary", "field", "startDate", "expectedEndDate", "funding"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "title": { "type": "string", "minLength": 1 },
+        "summary": { "type": "string" },
+        "field": { "type": "string" },
+        "startDate": { "type": "string" },
+        "expectedEndDate": { "type": "string" },
+        "projectNumber": { "type": "string" },
+        "primaryInvestigator": { "type": "string" },
+        "dataManager": { "type": "string" },
+        "funding": { "type": "array", "items": { "type": "object" } }
+      },
+      "additionalProperties": false
+    },
+    "answers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "sectionId",
+          "sectionTitle",
+          "questionId",
+          "questionLabel",
+          "type",
+          "required",
+          "answer",
+          "status"
+        ],
+        "properties": {
+          "sectionId": { "type": "string", "minLength": 1 },
+          "sectionTitle": { "type": "string", "minLength": 1 },
+          "questionId": { "type": "string", "minLength": 1 },
+          "questionLabel": { "type": "string", "minLength": 1 },
+          "type": { "type": "string", "minLength": 1 },
+          "required": { "type": "boolean" },
+          "answer": {
+            "oneOf": [
+              { "type": "string" },
+              { "type": "array", "items": { "type": "string" } },
+              { "type": "number" },
+              { "type": "boolean" },
+              { "type": "null" }
+            ]
+          },
+          "status": { "enum": ["answered", "missing"] }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

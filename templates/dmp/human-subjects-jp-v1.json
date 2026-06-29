@@ -1,0 +1,122 @@
+{
+  "id": "human-subjects-jp-v1",
+  "name": "人を対象とする研究向けDMPテンプレート",
+  "version": "1.0.0",
+  "locale": "ja",
+  "language": "ja",
+  "templateType": "human_subjects",
+  "description": "倫理審査、同意、匿名化、アクセス制御を重点確認するテンプレートです。",
+  "targetFunder": "general",
+  "targetDiscipline": "human_subjects",
+  "targetFundingAgencyTypes": [
+    "kakenhi",
+    "jst",
+    "amed",
+    "university",
+    "foundation",
+    "other"
+  ],
+  "sourceUrl": "https://github.com/chinahamu/rdmate-jp",
+  "compatibleTemplateVersions": [
+    "1.0.0"
+  ],
+  "maintainer": "RDMate JP project",
+  "lastReviewedAt": "2026-06-29",
+  "lastUpdated": "2026-06-29",
+  "sections": [
+    {
+      "id": "ethics",
+      "title": "倫理・同意",
+      "order": 1,
+      "questions": [
+        {
+          "id": "human_subject_applicability",
+          "label": "人を対象とする研究への該当性",
+          "type": "select",
+          "required": true,
+          "options": [
+            "該当する",
+            "該当しない",
+            "確認中"
+          ],
+          "order": 1
+        },
+        {
+          "id": "ethics_review_status",
+          "label": "倫理審査の状況",
+          "type": "select",
+          "required": true,
+          "options": [
+            "承認済み",
+            "申請中",
+            "不要",
+            "未定"
+          ],
+          "order": 2
+        },
+        {
+          "id": "consent_scope",
+          "label": "同意取得範囲と二次利用条件",
+          "type": "textarea",
+          "required": true,
+          "order": 3
+        }
+      ]
+    },
+    {
+      "id": "privacy",
+      "title": "匿名化・アクセス制御",
+      "order": 2,
+      "questions": [
+        {
+          "id": "personal_data_types",
+          "label": "含まれる個人情報・要配慮情報",
+          "type": "textarea",
+          "required": true,
+          "order": 1
+        },
+        {
+          "id": "anonymization_method",
+          "label": "匿名化・仮名化の方法",
+          "type": "textarea",
+          "required": true,
+          "order": 2
+        },
+        {
+          "id": "access_control",
+          "label": "アクセス制御と権限管理",
+          "type": "textarea",
+          "required": true,
+          "order": 3
+        }
+      ]
+    },
+    {
+      "id": "sharing",
+      "title": "共有・公開",
+      "order": 3,
+      "questions": [
+        {
+          "id": "sharing_policy",
+          "label": "共有・公開方針",
+          "type": "select",
+          "required": true,
+          "options": [
+            "公開",
+            "制限付き公開",
+            "非公開",
+            "未定"
+          ],
+          "order": 1
+        },
+        {
+          "id": "private_reason",
+          "label": "非公開・制限付き公開の理由",
+          "type": "textarea",
+          "required": false,
+          "order": 2
+        }
+      ]
+    }
+  ]
+}

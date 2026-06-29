@@ -1,0 +1,72 @@
+name: DMP Template Request
+description: 新しいDMPテンプレートや既存テンプレート改善を依頼します
+title: "template: "
+labels: ["template", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        DMPテンプレート要望ありがとうございます。助成機関、研究分野、必要な設問、既存テンプレートとの差分を記載してください。
+  - type: input
+    id: template-name
+    attributes:
+      label: テンプレート名・要望名
+      placeholder: 例：生命科学向け日本語DMPテンプレート
+    validations:
+      required: true
+  - type: dropdown
+    id: request-type
+    attributes:
+      label: 要望種別
+      options:
+        - 新規テンプレート
+        - 既存テンプレートの改善
+        - 設問追加
+        - 設問修正
+        - 選択肢追加・修正
+        - 翻訳・表記修正
+    validations:
+      required: true
+  - type: textarea
+    id: target-context
+    attributes:
+      label: 対象となる研究分野・助成機関・利用場面
+      description: 研究分野、助成制度、学内ルール、国際共同研究などの背景を記載してください。
+      placeholder: |
+        研究分野: 生命科学
+        助成機関: AMED / 科研費 / JST など
+        利用場面: 申請時DMP、研究開始時レビュー、リポジトリ登録前確認
+    validations:
+      required: true
+  - type: textarea
+    id: required-questions
+    attributes:
+      label: 必要な設問・セクション
+      description: 追加したい設問、必須にしたい項目、選択肢などを記載してください。
+    validations:
+      required: true
+  - type: textarea
+    id: source-or-rationale
+    attributes:
+      label: 根拠・参考資料
+      description: 助成機関要件、学内規程、既存DMP様式など、根拠や参考資料のURL・概要を記載してください。
+      placeholder: 公開資料URL、規程名、様式名など
+    validations:
+      required: false
+  - type: textarea
+    id: compatibility
+    attributes:
+      label: 既存テンプレートとの関係
+      description: 既存テンプレートID、互換性、移行が必要な項目があれば記載してください。
+      placeholder: 例：generic-jp-v2 に助成機関固有設問を追加したい。
+    validations:
+      required: false
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: 確認事項
+      options:
+        - label: 個人情報、秘密値、実データ本体を貼り付けていません
+          required: true
+        - label: 助成機関要件や規程を断定する場合は、確認可能な根拠を記載しました
+          required: false

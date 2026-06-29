@@ -1,0 +1,55 @@
+.access-control-summary,
+.access-control-card-grid,
+.access-control-card,
+.access-control-role-matrix {
+  display: grid;
+  gap: 20px;
+}
+
+.access-control-summary,
+.access-control-role-matrix {
+  grid-template-columns: minmax(0, 1.3fr) minmax(320px, 1fr);
+  margin-bottom: 20px;
+}
+
+.access-control-card-grid {
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  margin-bottom: 20px;
+}
+
+.access-control-card p,
+.access-control-summary p,
+.access-control-role-matrix p {
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.access-control-card[data-active='true'] {
+  border-color: #93c5fd;
+}
+
+.access-control-card .template-card__header strong {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 0.8rem;
+}
+
+.access-control-role-matrix .dataset-ledger-table-wrapper {
+  align-self: start;
+}
+
+.access-control-role-matrix th span {
+  display: block;
+  margin-top: 6px;
+  color: var(--muted);
+  font-weight: 400;
+}
+
+@media (max-width: 960px) {
+  .access-control-summary,
+  .access-control-role-matrix {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+}

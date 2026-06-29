@@ -1,0 +1,42 @@
+title: "DMP Template Proposal: "
+labels: ["template"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        DMPテンプレート案の事前相談用テンプレートです。仕様が固まったら `DMP Template Request` Issueへ移してください。
+  - type: input
+    id: template-title
+    attributes:
+      label: テンプレート案の名称
+      placeholder: 例：分野別日本語DMPテンプレート
+    validations:
+      required: true
+  - type: textarea
+    id: target
+    attributes:
+      label: 対象分野・助成機関・利用場面
+      description: 誰が、どのような場面で使うテンプレートかを記載してください。
+    validations:
+      required: true
+  - type: textarea
+    id: sections
+    attributes:
+      label: 想定セクション・設問
+      description: 含めたいセクションや設問を箇条書きで記載してください。
+    validations:
+      required: true
+  - type: textarea
+    id: references
+    attributes:
+      label: 参考資料
+      description: 公開資料URL、学内様式、助成機関の公開資料などがあれば記載してください。
+    validations:
+      required: false
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: 確認事項
+      options:
+        - label: 個人情報、秘密値、実データ本体を貼り付けていません
+          required: true

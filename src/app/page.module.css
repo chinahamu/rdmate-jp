@@ -1,0 +1,143 @@
+.workflowIntro {
+  margin: 0 0 28px;
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  background: var(--card);
+  padding: 24px;
+  box-shadow: 0 18px 45px rgb(15 23 42 / 8%);
+}
+
+.workflowIntro h2 {
+  margin: 8px 0 10px;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+}
+
+.workflowIntro p:last-child {
+  max-width: 820px;
+  margin-bottom: 0;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.workflowFlow {
+  display: grid;
+  gap: 18px;
+}
+
+.flowCard {
+  position: relative;
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr);
+  gap: 18px;
+}
+
+.flowCardConnector {
+  position: absolute;
+  top: 64px;
+  bottom: -20px;
+  left: 35px;
+  width: 2px;
+  background: var(--border);
+}
+
+.flowCard:last-child .flowCardConnector {
+  display: none;
+}
+
+.flowCardNumber {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  width: 72px;
+  height: 72px;
+  place-items: center;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--foreground);
+  color: white;
+  font-size: 1.25rem;
+  font-weight: 800;
+  box-shadow: 0 18px 45px rgb(15 23 42 / 10%);
+}
+
+.flowCardBody {
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  background: var(--card);
+  padding: 24px;
+  box-shadow: 0 18px 45px rgb(15 23 42 / 8%);
+}
+
+.flowCardHeader {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.flowCardHeader h2 {
+  margin: 4px 0 0;
+  font-size: 1.35rem;
+}
+
+.flowCardLabel {
+  margin: 0;
+  color: #3456d1;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.flowCardNext {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 6px 12px;
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.flowCardDescription {
+  margin: 16px 0 0;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.flowCardBody ul {
+  margin: 18px 0 0;
+  padding-left: 20px;
+}
+
+.flowCardBody li {
+  margin: 8px 0;
+}
+
+@media (max-width: 720px) {
+  .flowCard {
+    grid-template-columns: 52px minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .flowCardConnector {
+    top: 50px;
+    left: 25px;
+  }
+
+  .flowCardNumber {
+    width: 52px;
+    height: 52px;
+    font-size: 1rem;
+  }
+
+  .flowCardBody {
+    padding: 18px;
+  }
+
+  .flowCardHeader {
+    display: grid;
+  }
+}

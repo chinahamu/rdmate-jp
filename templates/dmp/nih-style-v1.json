@@ -1,0 +1,113 @@
+{
+  "id": "nih-style-v1",
+  "name": "NIH DMS Plan 風 英日併記テンプレート",
+  "version": "1.0.0",
+  "locale": "ja-en",
+  "language": "ja-en",
+  "templateType": "nih_dms",
+  "description": "NIH Data Management and Sharing Plan の構成を参考にした英日併記テンプレートです。",
+  "targetFunder": "nih",
+  "targetDiscipline": "general",
+  "targetFundingAgencyTypes": [
+    "nih"
+  ],
+  "sourceUrl": "https://sharing.nih.gov/data-management-and-sharing-policy",
+  "compatibleTemplateVersions": [
+    "1.0.0"
+  ],
+  "maintainer": "RDMate JP project",
+  "lastReviewedAt": "2026-06-29",
+  "lastUpdated": "2026-06-29",
+  "sections": [
+    {
+      "id": "data_type",
+      "title": "Data Type / データ種別",
+      "order": 1,
+      "questions": [
+        {
+          "id": "scientific_data",
+          "label": "Scientific data to be preserved and shared / 保存・共有する科学データ",
+          "type": "textarea",
+          "required": true,
+          "order": 1
+        },
+        {
+          "id": "metadata_standards",
+          "label": "Metadata and standards / メタデータ・標準",
+          "type": "textarea",
+          "required": true,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "id": "related_tools",
+      "title": "Related Tools, Software and Code / 関連ツール・ソフトウェア・コード",
+      "order": 2,
+      "questions": [
+        {
+          "id": "tools_required",
+          "label": "Tools or software needed to access data / データ利用に必要なツール",
+          "type": "textarea",
+          "required": false,
+          "order": 1
+        },
+        {
+          "id": "code_availability",
+          "label": "Code availability / コード公開方針",
+          "type": "select",
+          "required": true,
+          "options": [
+            "Public repository",
+            "Available on request",
+            "Not applicable",
+            "To be determined"
+          ],
+          "order": 2
+        }
+      ]
+    },
+    {
+      "id": "sharing_access",
+      "title": "Data Sharing and Access / データ共有とアクセス",
+      "order": 3,
+      "questions": [
+        {
+          "id": "repository",
+          "label": "Repository for shared data / 共有先リポジトリ",
+          "type": "text",
+          "required": true,
+          "order": 1
+        },
+        {
+          "id": "access_timeline",
+          "label": "Timeline for data sharing / データ共有時期",
+          "type": "text",
+          "required": true,
+          "order": 2
+        },
+        {
+          "id": "access_limitations",
+          "label": "Access restrictions and privacy considerations / アクセス制限・プライバシー配慮",
+          "type": "textarea",
+          "required": true,
+          "order": 3
+        }
+      ]
+    },
+    {
+      "id": "oversight",
+      "title": "Oversight / 監督体制",
+      "order": 4,
+      "questions": [
+        {
+          "id": "responsible_party",
+          "label": "Responsible party for DMS Plan compliance / DMS Plan遵守責任者",
+          "type": "text",
+          "required": true,
+          "order": 1
+        }
+      ]
+    }
+  ]
+}
