@@ -159,3 +159,10 @@ pnpm licenses:generate
 ```
 
 生成手順と確認観点は [`docs/third-party-licenses.md`](docs/third-party-licenses.md) を参照してください。
+
+## 連絡先
+
+お問い合わせやご意見は以下までご連絡ください。
+
+- メール: ktwriter43@gmail.com
+
